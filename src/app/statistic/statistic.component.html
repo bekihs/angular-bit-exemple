@@ -1,0 +1,16 @@
+<div className="statistic-page">
+    <ul>
+        <li *ngIf="marketData" className="statistic-chart">
+            <app-chart title={{marketData.title}} 
+            [data]=marketData.data
+            description={{marketData.description}} 
+            color="blue" ></app-chart>
+        </li>
+        <li *ngIf="transactionData"  className="statistic-chart">
+            <app-chart title={{transactionData.title}} 
+            [data]=transactionData.data
+            description={{transactionData.description}} 
+            color="green" ></app-chart>
+        </li>
+    </ul>
+  </div>
