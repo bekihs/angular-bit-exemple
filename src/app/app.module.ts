@@ -15,6 +15,8 @@ import { ChartComponent } from './chart/chart.component';
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { AppRoutingModule } from './app.routes';
 import { ContactComponent } from './contact/contact.component';
+import { ContactPreviewComponent } from './contact-preview/contact-preview.component';
+import { ContactService } from './services/contact.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +26,8 @@ import { ContactComponent } from './contact/contact.component';
     MenuComponent,
     StatisticComponent,
     ChartComponent,
-    ContactComponent
+    ContactComponent,
+    ContactPreviewComponent
   ],
   imports: [
     Ng2GoogleChartsModule,
@@ -33,7 +36,7 @@ import { ContactComponent } from './contact/contact.component';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [UsersService, BitcoinService],
+  providers: [UsersService, BitcoinService , ContactService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

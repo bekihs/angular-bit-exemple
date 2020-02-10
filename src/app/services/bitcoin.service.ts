@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Coin } from '../models/Coin';
-import { Subject } from 'rxjs/Subject';
-import  {Observable, BehaviorSubject} from 'rxjs/Rx';
+import  { BehaviorSubject} from 'rxjs/Rx';
 
 @Injectable()
 export class BitcoinService {
