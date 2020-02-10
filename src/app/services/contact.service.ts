@@ -8,8 +8,8 @@ import CONTACTS from './contacts.js'
 @Injectable()
 export class ContactService {
 
+  private _contacts:Contact[] = CONTACTS
   contacts = new BehaviorSubject<Array<Contact>>([])
-
 
   private _sort(arr: Contact[]): Contact[] {
     return arr.sort((a, b) => {
@@ -34,23 +34,21 @@ export class ContactService {
   }
 
   public loadContacts(filterBy = null): void {
-    let contactsToReturn = this.contacts.value.length ? this.contacts.value: CONTACTS;
     if (filterBy && filterBy.term) {
-      contactsToReturn = this._filter(filterBy.term, contactsToReturn)
+      this._contacts = this._filter(filterBy.term, this._contacts)
     }
-    this.contacts.next(this._sort(contactsToReturn))
+    this.contacts.next(this._sort(this._contacts))
   }
 
 
   public getContactById(id: string): Observable<Contact> {
-    this.loadContacts();
-    const contact = this.contacts.value.find(contact => contact._id === id)
+    const contact = this._contacts.find(contact => contact._id === id)
     return contact ? of(contact) : Observable.throw(`Contact id ${id} not found!`)
   }
 
   public deleteContact(id: string) {
-    const newContacts = this.contacts.value.filter(contact => contact._id !== id)
-    this.contacts.next(newContacts)
+    this._contacts= this._contacts.filter(contact => contact._id !== id)
+    this.contacts.next(this._contacts)
   }
 
   public saveContact(contact: Contact) {
@@ -58,13 +56,14 @@ export class ContactService {
   }
 
   private _updateContact(contact: Contact) {
-    const newContacts = this.contacts.value.map(c => contact._id === c._id ? contact : c)
-    this.contacts.next(newContacts)
+    this._contacts = this._contacts.map(c => contact._id === c._id ? contact : c)
+    this.contacts.next(this._contacts)
   }
 
   private _addContact(contact: Contact) {
     const newContact = new Contact(contact.name, contact.email, contact.phone);
     newContact.setId();
-    this.contacts.next([...this.contacts.value , newContact])
+    this._contacts.push(newContact)
+    this.contacts.next(this._contacts)
   }
 }
