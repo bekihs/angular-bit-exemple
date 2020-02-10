@@ -1,3 +1,6 @@
 <p *ngIf="contact">
-  {{contact.name}}
+  <input [(ngModel)]="contact.name">
+  <input [(ngModel)]="contact.email">
+  <input [(ngModel)]="contact.phone">
+  <button (click)="onSave()">save</button>
 </p>

@@ -34,7 +34,7 @@ export class ContactService {
   }
 
   public loadContacts(filterBy = null): void {
-    let contactsToReturn = CONTACTS;
+    let contactsToReturn = this.contacts.value.length ? this.contacts.value: CONTACTS;
     if (filterBy && filterBy.term) {
       contactsToReturn = this._filter(filterBy.term, contactsToReturn)
     }
@@ -43,6 +43,7 @@ export class ContactService {
 
 
   public getContactById(id: string): Observable<Contact> {
+    this.loadContacts();
     const contact = this.contacts.value.find(contact => contact._id === id)
     return contact ? of(contact) : Observable.throw(`Contact id ${id} not found!`)
   }

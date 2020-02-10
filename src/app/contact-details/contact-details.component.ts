@@ -10,15 +10,19 @@ import Contact from '../models/Contacts';
 })
 export class ContactDetailsComponent implements OnInit {
 
-  contact:Contact = new Contact('')
+  contact: Contact = new Contact('')
   constructor(private route: ActivatedRoute,
-    private router: Router , private contactService:ContactService) { }
+    private router: Router, private contactService: ContactService) { }
 
-
+  onSave() {
+    this.contactService.saveContact(this.contact);
+    this.router.navigate(['/contacts'])
+  }
   ngOnInit() {
     this.route.params.subscribe(params => {
       const id = params['id'];
-      this.contactService.getContactById(id).subscribe((conatct) => {
+      if (id !== 'new')
+        this.contactService.getContactById(id).subscribe((conatct) => {
           this.contact = conatct;
         });
     });
