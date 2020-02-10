@@ -45,22 +45,15 @@ export class BitcoinService {
   return this.transactionSubject;
 }
 
-// public watchBitcoinRate(cb) {
-//   const getRate = async ()=>{
-//       this.getBitcoinRate(1).subscribe((rate:number)=>{
-
-//         if (rate === this.lastRate) return;
-//         this.lastRate = rate;        
-//         rate = +rate.toFixed(8)
-//         cb(rate)
-//     })
-      
-//   }
-//   // Kick it off immediately and then every 4 secs
-//   getRate();
-//   var interval = setInterval(getRate, 4000)
-//   return ()=>clearInterval(interval)
-// }
+public watchBitcoinRate() {
+  const getRate = async ()=>{
+      this.getBitcoinRate(1)       
+  }
+  // Kick it off immediately and then every 4 secs
+  getRate();
+  var interval = setInterval(getRate, 4000)
+  return ()=>clearInterval(interval)
+}
  
 
 }

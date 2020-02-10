@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { User } from '../models/user';
 import { UsersService } from '../services/users.service';
 import { Router } from '@angular/router';
@@ -9,9 +9,8 @@ import { BitcoinService } from '../services/bitcoin.service';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
-export class MainComponent implements OnInit {
-
-  user: User = new User("");
+export class MainComponent implements OnInit , OnDestroy {
+   user: User = new User("");
   
   bitcoinRate = 0
   imgCoinsClassName = ''
@@ -30,18 +29,17 @@ export class MainComponent implements OnInit {
       }
     })
 
-    // this.stopWatching = this.bitcoinService.watchBitcoinRate((rate)=>{
-    //   this.imgArrow = rate > this.bitcoinRate ? "assets/icons/arrow-up.png" : rate < this.bitcoinRate ?"assets/icons/arrow-down.png" :"";
-    //   this.bitcoinRate = rate;
-    //   this.imgCoinsClassName = 'animated wobble'
-    //   setTimeout(()=>this.imgCoinsClassName = '', 2000)
-    // })
+    this.stopWatching = this.bitcoinService.watchBitcoinRate()
+    this.bitcoinService.bitcoinSubject.subscribe((rate)=>{
+      this.imgArrow = rate > this.bitcoinRate ? "assets/icons/arrow-up.png" : rate < this.bitcoinRate ?"assets/icons/arrow-down.png" :"";
+      this.bitcoinRate = rate;
+      this.imgCoinsClassName = 'animated wobble'
+      setTimeout(()=>this.imgCoinsClassName = '', 2000)
+    })
   }
 
-  // ngOnDestroy() {
-  //   this.stopWatching();
-  // }
-
-
+  ngOnDestroy() {
+    this.stopWatching();
+  }
 
 }

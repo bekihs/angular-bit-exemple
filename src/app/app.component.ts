@@ -14,7 +14,7 @@ export class AppComponent {
     private bitcoinService: BitcoinService) { }
 
   ngOnInit() {
-    this.bitcoinService.getBitcoinRate(100);
+    // this.bitcoinService.getBitcoinRate(100);
     this.usersService.userSubject.subscribe(next => {
       this.user = next;
     })
