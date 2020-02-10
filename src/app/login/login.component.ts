@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
  }
 
   login(username:string){
-    if (username.length>0){
+    if (username.length>0){debugger;
       this.usersService.login(username);
     }
   }
