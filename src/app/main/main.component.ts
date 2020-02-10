@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../modules/user';
-import { UsersService } from '../users.service';
+import { User } from '../models/user';
+import { UsersService } from '../services/users.service';
 import { Router } from '@angular/router';
-import { BitcoinService } from '../bitcoin.service';
+import { BitcoinService } from '../services/bitcoin.service';
 
 @Component({
   selector: 'app-main',
@@ -23,7 +23,6 @@ export class MainComponent implements OnInit {
     return +((this.bitcoinRate * this.user.coins).toFixed(2));
   }
   ngOnInit() {
-      this.user = this.usersService.user;
       this.usersService.userSubject.subscribe(next=>{
       this.user = next;
       if (!this.user){

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BitcoinService } from '../bitcoin.service';
-import { Coin } from '../modules/Coin';
+import { BitcoinService } from '../services/bitcoin.service';
+import { Coin } from '../models/Coin';
 
 @Component({
   selector: 'app-statistic',

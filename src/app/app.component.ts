@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { User } from './modules/user';
-import { UsersService } from './users.service';
-import { BitcoinService } from './bitcoin.service';
+import { User } from './models/user';
+import { UsersService } from './services/users.service';
+import { BitcoinService } from './services/bitcoin.service';
 
 @Component({
   selector: 'app-root',
@@ -9,14 +9,13 @@ import { BitcoinService } from './bitcoin.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  user:User = null;
-  constructor(private usersService: UsersService ,
-             private bitcoinService: BitcoinService) { }
+  user: User = null;
+  constructor(private usersService: UsersService,
+    private bitcoinService: BitcoinService) { }
 
   ngOnInit() {
-      this.bitcoinService.getBitcoinRate(100);
-      this.user = this.usersService.user;
-      this.usersService.userSubject.subscribe(next=>{
+    this.bitcoinService.getBitcoinRate(100);
+    this.usersService.userSubject.subscribe(next => {
       this.user = next;
     })
   }
