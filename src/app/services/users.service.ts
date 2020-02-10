@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { User } from '../models/user';
-import { Subject, ReplaySubject } from 'rxjs';
+import { Subject, ReplaySubject, BehaviorSubject } from 'rxjs';
 const USER_KEY = "user";
 
 @Injectable()
 export class UsersService {
-  userSubject = new ReplaySubject<User>();
+  userSubject = new BehaviorSubject<User>(null);
 
   constructor(){
     this.getUserFromLocalStorage();
