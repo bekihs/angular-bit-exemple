@@ -23,10 +23,10 @@ export class MainComponent implements OnInit , OnDestroy {
   }
   ngOnInit() {
       this.usersService.userSubject.subscribe(next=>{
-      this.user = next;
-      if (!this.user){
+      if (!next){
         this.router.navigate(['/login'])
       }
+      else this.user = next;
     })
 
     this.stopWatching = this.bitcoinService.watchBitcoinRate()

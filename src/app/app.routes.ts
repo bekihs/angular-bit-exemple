@@ -9,6 +9,7 @@ const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'statistics', component: StatisticComponent },
     { path: 'contacts', component: ContactComponent }, 
+    { path: 'contacts/:id', component: ContactComponent }, 
     { path: '**', component: MainComponent }
   ];
 
